@@ -4,7 +4,11 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from app.config import settings
 
-engine = create_engine(settings.DATABASE_URL)
+# Added connect_args to prevent threading errors with SQLite
+engine = create_engine(
+    settings.DATABASE_URL, 
+    connect_args={"check_same_thread": False} if "sqlite" in settings.DATABASE_URL else {}
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -17,7 +21,6 @@ class MonitoredTarget(Base):
     last_checked = Column(DateTime, default=datetime.utcnow)
     follower_count_cache = Column(Integer, default=0)
 
-# डेटाबेस टेबल्स बनाने के लिए यूटिलिटी
 def init_pg_db():
     Base.metadata.create_all(bind=engine)
-  
+    
