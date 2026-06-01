@@ -1,1 +1,17 @@
+# FastAPI & Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic-settings>=2.2.1
+
+# Databases (SQL & Graph)
+sqlalchemy>=2.0.28
+psycopg2-binary>=2.9.9
+neo4j>=5.18.0
+
+# OSINT Analytics & Network Graph
+networkx>=3.2.1
+requests>=2.31.0
+
+# Automation & Scheduling (Live Monitoring Heartbeat)
+APScheduler>=3.10.4
 
